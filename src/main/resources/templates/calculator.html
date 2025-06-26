@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <style>
+        @font-face {
+            font-family: 'CookieRun';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+          font-family: CookieRun;
+          background-color: #CFDEF3;
+          margin: 0;
+          padding: 20px;
+        }
+
+        h1 {
+            color: #BA5370;
+            background-color: #F4E2D8;
+            padding: 10px;
+            max-width: 300px;
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        form {
+            background: #FFC371;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 20px rgba(255,255,255,1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label{
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input, select{
+            width: 100%;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #0c0c0c;
+            background-color: #CFDEF3;
+            font-size: 20px;
+        }
+
+        select{
+            cursor: pointer;
+        }
+
+        button{
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .result, .error{
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .result {
+            background-color: #e7f3fe;
+            color: #31708f;
+        }
+
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+    </style>
+</head>
+<body>
+<h1>Calculator</h1>
+<!--PostMapping 주소-->
+<form th:action="@{/calculate}" method="post">
+    <label for="num1">Number 1:</label>
+    <input type="number" step="any" id="num1" name="num1" required/>
+
+    <label for="num2">Number 2:</label>
+    <input type="number" step="any" id="num2" name="num2" required/>
+
+    <label for="operation">Operation</label>
+    <select id="operation" name="operation" style="font-family:CookieRun">
+        <option value="add">Add (+)</option>
+        <option value="sub">Sub (-)</option>
+        <option value="mul">Mul (x)</option>
+        <option value="div">Div (÷)</option>
+    </select>
+
+    <button type="submit" style="font-family:CookieRun">Calculate</button>
+</form>
+
+    <!--model.addAttribute-->
+<div th:if="${result}" class="result">
+    <h2>Result: <span th:text="${result}"></span></h2>
+</div>
+
+<div th:if="${errorMessage}" class="error">
+    <h2>Result: <span th:text="${errorMessage}"></span></h2>
+</div>
+
+</body>
+</html>
